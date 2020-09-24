@@ -1,0 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&family=Roboto+Slab&display=swap");
+:root {
+  /* define all colors */
+  --bg-color: #f9f7f7;
+  --bg-color-secondary: #dbe2ef;
+  --primary: #3f72af;
+  --secondary: #112d4e;
+  --text: #212121;
+  --secondary-text: #757575;
+  --divider: #bdbdbd;
+}
