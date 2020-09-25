@@ -9,3 +9,134 @@
   --secondary-text: #757575;
   --divider: #bdbdbd;
 }
+
+/* MEDIA QUERIES */
+@media screen and (max-width: 817px) {
+  /* start of awkward width screens */
+}
+@media screen and (max-width: 769px) {
+  /* start of medium tablet styles */
+  .hero-item.description .text-subtitle {
+    font-size: 3em !important;
+  }
+  .hero-item.description .text {
+    font-size: 1.5em !important;
+  }
+}
+@media screen and (max-width: 479px) {
+  /* start of phone styles */
+  .navbar-container {
+    display: none !important;
+  }
+  .hero-container {
+    display: flex !important;
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  background-color: var(--bg-color-secondary);
+}
+
+a {
+  text-decoration: inherit;
+  color: inherit;
+}
+
+.main-container {
+  /* background-color: var(--secondary); */
+  background-image: linear-gradient(#212121, #112d4e, #3f72af);
+}
+section#home {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, 0%);
+}
+section {
+  width: 80vw;
+  max-width: 1290px;
+  margin: auto;
+  height: 90vh;
+}
+.particles-js-canvas-el {
+  height: 90vh !important;
+}
+
+.text-title {
+  font-size: 1.5em;
+  font-family: "Raleway", sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.text-subtitle {
+  font-family: "Raleway", sans-serif;
+}
+
+.text {
+  font-family: "Roboto Slab", serif;
+}
+
+.size-4 {
+  font-size: 4em;
+}
+.size-3 {
+  font-size: 3em;
+}
+.size-2 {
+  font-size: 2em;
+}
+
+.color-secondary {
+  color: var(--secondary) !important;
+}
+
+.bg-color {
+  color: var(--bg-color) !important;
+}
+
+.bg-color-secondary {
+  color: var(--bg-color-secondary) !important;
+}
+
+.home-container {
+  display: grid;
+  grid-template-rows: auto;
+  row-gap: 2em;
+}
+
+.navbar-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  place-items: center;
+}
+.navbar-item {
+  cursor: pointer;
+  padding: 0.5em;
+}
+.navbar-placeholder {
+  pointer-events: none;
+}
+
+.hero-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  place-items: center;
+}
+.hero-item {
+  padding: 0.5em;
+}
+
+.navbar-item:hover {
+  background-color: var(--secondary);
+  color: var(--bg-color-secondary) !important;
+}
