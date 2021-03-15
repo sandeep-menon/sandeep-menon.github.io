@@ -1,80 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="files/style.css" />
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="files/assets/apple-touch-icon.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="files/assets/favicon-32x32.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="files/assets/favicon-16x16.png"
-    />
-    <link rel="manifest" href="/site.webmanifest" />
-    <script src="files/assets/particle.js"></script>
-
-    <title>Sandeep Menon's Techfolio</title>
-  </head>
-  <body>
-    <div id="main" class="main-container"></div>
-    <section id="home">
-      <div class="home-container">
-        <div class="home-item navbar-container">
-          <div class="navbar-item navbar-placeholder"></div>
-          <div class="navbar-item text-title bg-color-secondary">
-            <a href="#about" class="no-style">About</a>
-          </div>
-          <div class="navbar-item text-title bg-color-secondary">Projects</div>
-          <div class="navbar-item text-title bg-color-secondary">More</div>
-        </div>
-        <div class="home-item menubar-container"></div>
-        <div class="home-item hero-container">
-          <div class="hero-item avatar">
-            <img
-              src="/files/assets/avataaars.svg"
-              alt="That's how I really look!"
-            />
-          </div>
-          <div class="hero-item description">
-            <div class="text-subtitle size-4 bg-color-secondary">
-              Hi there 👋
-            </div>
-            <div class="text-subtitle size-4 bg-color-secondary">
-              I'm Sandeep
-            </div>
-            <div class="text size-2 bg-color-secondary" style="margin-top: 1em">
-              - a Senior Siebel CRM Consultant, a self taught web developer and
-              a hobbyist programmer.
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Sandeep Menon's Techfolio</title>
+  <meta name="description" content="A senior Siebel CRM consultant's technical portfolio.">
+  <link rel="icon" type="image/png" href="./files/assets/favicon-32x32.png">
+  <link rel="apple-touch-icon" href="./files/assets/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <script src="https://kit.fontawesome.com/c43319c251.js" crossorigin="anonymous"></script>
+  <script src="files/assets/particle.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  <link rel="stylesheet" href="files/style.css">
+</head>
+<body>
+  <section id="home" class="p-1">
+    <div class="modal-dialog modal-dialog-centered" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-md-6 col-xs-12 text-center">
+                  <img src="./files/assets/avataaars.svg" height="80%">
+                </div>
+                <div class="col-md-6 col-xs-12 text-center">
+                  <div class="col-12">
+                    <div class="fs-1 fw-bolder title" style="color:#f7f7f7;">Hi there 👋<br>I'm Sandeep</div>
+                  </div>
+                  <div class="col-12">
+                    <div class="fs-4 text" style="color:#f7f7f7;">- a Siebel CRM consultant, a self taught web developer and a hobbyist programmer.</div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
-    <section id="about">
-      <p class="text">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam et est
-        id metus varius ullamcorper et ultrices felis. Aenean eros metus,
-        euismod in eros vitae, gravida blandit leo. Nullam a sapien arcu.
-        Phasellus egestas quam ut pretium tempor. Ut interdum, orci id cursus
-        dapibus, quam lorem placerat lorem, at ultrices felis dolor vel urna.
-        Curabitur accumsan nulla ligula, at tincidunt ante rhoncus in. Nam
-        imperdiet pellentesque bibendum. Integer at risus bibendum, mattis diam
-        vitae, auctor odio. Nunc eu purus risus. Phasellus ornare scelerisque
-        sodales. Aliquam ante diam, finibus ac arcu in, scelerisque pellentesque
-        justo. Aliquam ut bibendum ligula, id mollis lorem.
-      </p>
-    </section>
-    <script src="files/script.js"></script>
-  </body>
+    </div>
+  </section>
+  <div id="navbar-wrapper" style="margin-top: -61px;">
+    <nav id="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid" style="max-width: 900px;">
+        <a class="navbar-brand" href="#top"><img src="./files/assets/favicon-32x32.png" alt="Home"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link fs-5 title" href="#about">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link fs-5 title" href="#projects">Projects</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <section id="about" style="max-width: 900px; margin: auto; height: 100vh;">
+    <h2>About</h2>
+    <div class="divider"></div>
+  </section>
+  <section id="projects" style="max-width: 900px; margin: auto; height: 100vh;">
+    <h2>Projects</h2>
+    <div class="divider"></div>
+  </section>
+  <script src="./files/script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+</body>
 </html>
