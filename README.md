@@ -1,1 +1,0 @@
-# sandeep-menon.github.io
