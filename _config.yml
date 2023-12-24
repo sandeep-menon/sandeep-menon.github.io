@@ -1,7 +1,8 @@
 ### Site Settings ###
 title               : Sandeep Menon
 description         : >-
-                      Hi there 👋, I'm Sandeep - a Siebel CRM consultant, a self taught web developer and a hobbyist programmer.
+                      Hi there 👋, I'm Sandeep. 
+                      I am a Siebel CRM tech lead and a self taught programmer. This is my kitchen sink where I toss everything I have stumbled upon while working with computers.
 baseurl             : ""                     # Change to empty quotes if you are hosting your site at <your-username>.github.io directly
 repository          : sandeep-menon/sandeep-menon.github.io     # Change to <your-username>/<your-username>.github.io (or remove it if you don't need remote projects)
 remote_theme        : YoussefRaafatNasry/portfolYOU

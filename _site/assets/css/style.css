@@ -2,6 +2,8 @@
 @import url("https://fonts.googleapis.com/css?family=Poppins");
 #attribution { display: none; }
 
+.circle-image { border: 0.5rem solid #6c757d; }
+
 .cls-1 { fill: #ffc541; }
 
 .cls-2 { fill: #4e4066; }
