@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+
+<!--
+  portfolYOU Jekyll theme by Youssef Raafat
+  Free for personal and commercial use under the MIT license
+  https://github.com/YoussefRaafatNasry/portfolYOU
+-->
+
+<html lang="en" class="h-100">
+
+<head>
+
+  
+  
+  
+
+  
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Interactive NodeJS Command Line Application">
+  <meta property="og:description" content="A step-by-step guide to build a NodeJS command line application.">
+  <meta property="og:image" content="assets/28977810.png">
+
+  <title>Interactive NodeJS Command Line Application</title>
+  <meta name="description" content="A step-by-step guide to build a NodeJS command line application.">
+
+  <link rel="shortcut icon" type="image/x-icon" href="/assets/favicon.ico">
+
+  <!-- Theme style -->
+  <script src="/assets/js/theme.js"></script>
+
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+
+  <!-- Bootstrap CSS CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+
+  <!-- Animate CSS CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/assets/css/style.css">
+
+</head>
+
+
+<body class="h-100 d-flex flex-column">
+
+  <main class="flex-shrink-0 container mt-5">
+    <nav class="navbar navbar-expand-lg navbar-themed">
+
+  <a class="navbar-brand" href="/"><h5><b>Sandeep Menon</b></h5></a>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <i class="fas fa-1x fa-bars text-themed"></i>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav ml-auto"><a class="nav-item nav-link " href="/projects/">Projects</a>
+
+      <a class="nav-item nav-link active" href="/blog/">Blog</a>
+
+      <a class="nav-item nav-link " href="/about/">About</a>
+
+      
+
+      <span id="theme-toggler" class="nav-item nav-link" role="button" onclick="toggleTheme()"></span>
+    </div>
+  </div>
+
+</nav>
+    <div class="col-lg-10 mx-auto mt-5 markdown-body">
+  <h1><b>Interactive NodeJS Command Line Application</b></h1>
+
+<p class="post-metadata text-muted">
+  30 December 2023 -  
+  <b>9 mins read time</b>
+
+  <br>Tags: 
+    
+    <a class="text-decoration-none no-underline" href="/blog/tags#nodejs">
+      <span class="tag badge badge-pill text-primary border border-primary">NodeJS</span>
+    </a>
+    
+    <a class="text-decoration-none no-underline" href="/blog/tags#cli">
+      <span class="tag badge badge-pill text-primary border border-primary">CLI</span>
+    </a>
+    
+    <a class="text-decoration-none no-underline" href="/blog/tags#javascript">
+      <span class="tag badge badge-pill text-primary border border-primary">JavaScript</span>
+    </a>
+    
+    <a class="text-decoration-none no-underline" href="/blog/tags#tutorial">
+      <span class="tag badge badge-pill text-primary border border-primary">Tutorial</span>
+    </a>
+    
+    <a class="text-decoration-none no-underline" href="/blog/tags#inquirer">
+      <span class="tag badge badge-pill text-primary border border-primary">inquirer</span>
+    </a>
+    
+    <a class="text-decoration-none no-underline" href="/blog/tags#boxen">
+      <span class="tag badge badge-pill text-primary border border-primary">boxen</span>
+    </a>
+    
+    <a class="text-decoration-none no-underline" href="/blog/tags#ora">
+      <span class="tag badge badge-pill text-primary border border-primary">ora</span>
+    </a>
+    </p>
+
+<p><img src="../assets/images/Interactive%20NodeJS.png" alt="Cover Image" /></p>
+
+<p>Let’s face it, not all applications need to have a GUI. Especially when it comes to a large enterprise work enviornment, you are limited by the resources provided to your team. Whether it is time, user runtime or both.</p>
+
+<p>In this step-by-step guide we will learn how to create an interactive <code class="language-plaintext highlighter-rouge">nodejs</code> command line application which fetches quote of the day, displays the result in fancy ASCII art, asks user whether they want to save the quote by writing to the file system. And we will also work with javascript <code class="language-plaintext highlighter-rouge">Promises</code> along the way.</p>
+
+<h2 id="demo-tldr">Demo TL;DR</h2>
+
+<p>This is what we will be building:</p>
+
+<p><img src="../assets/images/cee54c85-17e7-465a-803d-d1d868428f2a.gif" alt="Demo" /></p>
+
+<h2 id="requirement">Requirement</h2>
+
+<ol>
+  <li>When the application starts, a random quote is fetched from an API.</li>
+  <li>While the quote is being fetched, we will display a loading text with spinner using <code class="language-plaintext highlighter-rouge">ora</code> package.</li>
+  <li>The quote will be displayed in an attractive manner using the <code class="language-plaintext highlighter-rouge">boxen</code> package.</li>
+  <li>In the end we will prompt a confirm question to the user to save the quote in <code class="language-plaintext highlighter-rouge">json</code> format by using <code class="language-plaintext highlighter-rouge">inquirer</code> package.</li>
+</ol>
+
+<h2 id="setup-project">Setup Project</h2>
+
+<p>Create a new folder for e.g. <code class="language-plaintext highlighter-rouge">node-cli</code> and navigate into it using your favourite terminal.</p>
+
+<p>Run <code class="language-plaintext highlighter-rouge">npm init</code> and follow the prompts.</p>
+
+<p>Open the newly created directory in your favourite IDE and open the <code class="language-plaintext highlighter-rouge">package.json</code> file. We will add a starter script and define the type as <code class="language-plaintext highlighter-rouge">module</code> for easy importing.</p>
+
+<p>Your <code class="language-plaintext highlighter-rouge">package.json</code> should look like this initially:</p>
+
+<p><img src="../assets/images/jjkxkop3mm4zv4dk90gy.png" alt="Initial package.json file" /></p>
+
+<p>Create a <code class="language-plaintext highlighter-rouge">index.js</code> file in the same place as your <code class="language-plaintext highlighter-rouge">package.json</code>. This will be the entry point to our application. For now just save it with <code class="language-plaintext highlighter-rouge">console.log("Hello, world!");</code>.</p>
+
+<p>Open your terminal at <code class="language-plaintext highlighter-rouge">node-cli</code> folder and run the command <code class="language-plaintext highlighter-rouge">npm start</code>. If everything is correctly configured, terminal will say “Hello, world!” as below:</p>
+
+<p><img src="../assets/images/cwq43ov0gfkd2fk0b0o8.gif" alt="Running index.js in terminal" /></p>
+
+<p>Now that’s out of the way, let’s start building.</p>
+
+<h3 id="importing-required-packages">Importing required packages</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm <span class="nb">install </span>inquirer ora boxen uuid
+</code></pre></div></div>
+
+<h3 id="defining-utilities-and-questions">Defining utilities and questions</h3>
+
+<p>Create a new folder <code class="language-plaintext highlighter-rouge">src</code> in the root directory. Inside this folder we will create two new files. <code class="language-plaintext highlighter-rouge">utilities.js</code> will contain our helper functions which we will call from <code class="language-plaintext highlighter-rouge">index.js</code>. Helper functions include fetching a random quote from API and saving the quote to filesystem in a <code class="language-plaintext highlighter-rouge">json</code> file. The other file will be <code class="language-plaintext highlighter-rouge">questions.js</code> which will contain the confirm prompt to the user, whether they want to save the quote or not.</p>
+
+<p>In the <code class="language-plaintext highlighter-rouge">utilities.js</code> file we will call the <a href="https://zenquotes.io/">Zen Quotes</a> API to fetch a random quote. In order to simulate that the API is taking time, we will wrap this as a <code class="language-plaintext highlighter-rouge">Promise</code> which resolves after 5 seconds.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ./src/utilities.js</span>
+<span class="k">export</span> <span class="kd">function</span> <span class="nx">getRandomQuote</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="k">async</span> <span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">resp</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">https://zenquotes.io/api/random</span><span class="dl">"</span><span class="p">);</span>
+    <span class="kd">let</span> <span class="nx">quote</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">resp</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+    <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+      <span class="nx">resolve</span><span class="p">(</span><span class="nx">quote</span><span class="p">);</span>
+    <span class="p">},</span> <span class="mi">5000</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>In the <code class="language-plaintext highlighter-rouge">index.js</code> file, we will first display a spinner which says that the quote is being fetched from the internet. To display the spinner we will make use of a package called <code class="language-plaintext highlighter-rouge">ora</code>. To display the quote in a fancy manner we will use <code class="language-plaintext highlighter-rouge">boxen</code>.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// index.js</span>
+<span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">utils</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./src/utilities.js</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">ora</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">ora</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">boxen</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">boxen</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">let</span> <span class="nx">spinner</span> <span class="o">=</span> <span class="nx">ora</span><span class="p">(</span><span class="dl">"</span><span class="s2">Fetching quote from the internet...</span><span class="dl">"</span><span class="p">).</span><span class="nx">start</span><span class="p">();</span>
+<span class="kd">let</span> <span class="nx">quote</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">utils</span><span class="p">.</span><span class="nx">getRandomQuote</span><span class="p">();</span>
+<span class="nx">spinner</span><span class="p">.</span><span class="nx">succeed</span><span class="p">(</span><span class="dl">"</span><span class="s2">Quote fetched:</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span>
+  <span class="nx">boxen</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">quote</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">q</span><span class="p">}</span><span class="s2">`</span><span class="p">,</span> <span class="p">{</span>
+    <span class="na">title</span><span class="p">:</span> <span class="s2">`</span><span class="p">${</span><span class="nx">quote</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">a</span><span class="p">}</span><span class="s2">`</span><span class="p">,</span>
+    <span class="na">padding</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="na">margin</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="na">borderStyle</span><span class="p">:</span> <span class="dl">"</span><span class="s2">round</span><span class="dl">"</span><span class="p">,</span>
+  <span class="p">})</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<p><strong>Note:</strong> As <code class="language-plaintext highlighter-rouge">utils.getRandomQuote()</code> returns a promise, we can await the response and essentially block the execution till the quote is received.</p>
+
+<h3 id="ask-a-question">Ask a question</h3>
+
+<p>Now let’s add the functionality of asking a question. In the <code class="language-plaintext highlighter-rouge">questions.js</code> file we will add a new export function as follows:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ./src/questions.js</span>
+<span class="k">import</span> <span class="nx">inquirer</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">inquirer</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="kd">function</span> <span class="nx">confirmSave</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">inquirer</span><span class="p">.</span><span class="nx">prompt</span><span class="p">([</span>
+    <span class="p">{</span>
+      <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">confirm</span><span class="dl">"</span><span class="p">,</span>
+      <span class="na">message</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Do you want to save this quote?</span><span class="dl">"</span><span class="p">,</span>
+      <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">list</span><span class="dl">"</span><span class="p">,</span>
+      <span class="na">choices</span><span class="p">:</span> <span class="p">[</span><span class="dl">"</span><span class="s2">Yes</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">No</span><span class="dl">"</span><span class="p">],</span>
+    <span class="p">},</span>
+  <span class="p">]);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>Note:</strong> You can ask multiple questions in a single prompt. Note how <code class="language-plaintext highlighter-rouge">inquirer.prompt</code> is taking an array of objects as input.</p>
+
+<p>Here in the exported function <code class="language-plaintext highlighter-rouge">confirmSave()</code> we are returning the result of a prompt. The property <code class="language-plaintext highlighter-rouge">name</code> is the key of the user’s answer. <code class="language-plaintext highlighter-rouge">inquirer.prompt</code> is internally a promise, hence in the <code class="language-plaintext highlighter-rouge">index.js</code> file we can call it as below:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">confirmResp</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">questions</span><span class="p">.</span><span class="nx">confirmSave</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p>Let’s create another function in the <code class="language-plaintext highlighter-rouge">utilities.js</code> file to save the quote in <code class="language-plaintext highlighter-rouge">json</code> format in local file.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ./src/utilities.js</span>
+<span class="k">import</span> <span class="nx">fs</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">fs</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">v4</span> <span class="k">as</span> <span class="nx">uuidv4</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">uuid</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="kd">function</span> <span class="nx">getRandomQuote</span><span class="p">()</span> <span class="p">{</span> <span class="p">...</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">async</span> <span class="kd">function</span> <span class="nx">saveQuote</span><span class="p">(</span><span class="nx">quote</span><span class="p">,</span> <span class="nx">author</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">path</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">data/quotes.json</span><span class="dl">"</span><span class="p">;</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">fs</span><span class="p">.</span><span class="nx">existsSync</span><span class="p">(</span><span class="nx">path</span><span class="p">))</span> <span class="p">{</span>
+        <span class="c1">// file does not exist, create one</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">fs</span><span class="p">.</span><span class="nx">existsSync</span><span class="p">(</span><span class="dl">"</span><span class="s2">data</span><span class="dl">"</span><span class="p">))</span> <span class="p">{</span>
+            <span class="c1">// folder does not exist, create one</span>
+            <span class="nx">fs</span><span class="p">.</span><span class="nx">mkdirSync</span><span class="p">(</span><span class="dl">"</span><span class="s2">data</span><span class="dl">"</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="kd">let</span> <span class="nx">id</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">uuidv4</span><span class="p">();</span>
+        <span class="kd">let</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">{};</span>
+        <span class="nx">data</span><span class="p">[</span><span class="nx">id</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="na">quote</span><span class="p">:</span> <span class="nx">quote</span><span class="p">,</span>
+            <span class="na">author</span><span class="p">:</span> <span class="nx">author</span>
+        <span class="p">};</span>
+        <span class="kd">let</span> <span class="nx">dataString</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+        <span class="nx">fs</span><span class="p">.</span><span class="nx">writeFileSync</span><span class="p">(</span><span class="nx">path</span><span class="p">,</span> <span class="nx">dataString</span><span class="p">,</span> <span class="dl">"</span><span class="s2">utf-8</span><span class="dl">"</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="c1">// file exists, append quote</span>
+        <span class="kd">let</span> <span class="nx">dataString</span> <span class="o">=</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">readFileSync</span><span class="p">(</span><span class="nx">path</span><span class="p">);</span>
+        <span class="kd">let</span> <span class="nx">id</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">uuidv4</span><span class="p">();</span>
+        <span class="kd">let</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">dataString</span><span class="p">);</span>
+        <span class="nx">data</span><span class="p">[</span><span class="nx">id</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="na">quote</span><span class="p">:</span> <span class="nx">quote</span><span class="p">,</span>
+            <span class="na">author</span><span class="p">:</span> <span class="nx">author</span>
+        <span class="p">};</span>
+        <span class="nx">dataString</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+        <span class="nx">fs</span><span class="p">.</span><span class="nx">writeFileSync</span><span class="p">(</span><span class="nx">path</span><span class="p">,</span> <span class="nx">dataString</span><span class="p">,</span> <span class="dl">"</span><span class="s2">utf-8</span><span class="dl">"</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Here we are using <code class="language-plaintext highlighter-rouge">nodejs</code> filesystem API to interact with the local file. Also, we are using <code class="language-plaintext highlighter-rouge">uuid</code> to generate an ID for our quote.</p>
+
+<p>Finally, in our <code class="language-plaintext highlighter-rouge">index.js</code> we will have the following:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// index.js</span>
+<span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">questions</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./src/questions.js</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">utils</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./src/utilities.js</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">ora</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">ora</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">boxen</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">boxen</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">let</span> <span class="nx">spinner</span> <span class="o">=</span> <span class="nx">ora</span><span class="p">(</span><span class="dl">"</span><span class="s2">Fetching quote from the internet...</span><span class="dl">"</span><span class="p">).</span><span class="nx">start</span><span class="p">();</span>
+<span class="kd">let</span> <span class="nx">quote</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">utils</span><span class="p">.</span><span class="nx">getRandomQuote</span><span class="p">();</span>
+<span class="nx">spinner</span><span class="p">.</span><span class="nx">succeed</span><span class="p">(</span><span class="dl">"</span><span class="s2">Quote fetched:</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span>
+  <span class="nx">boxen</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">quote</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">q</span><span class="p">}</span><span class="s2">`</span><span class="p">,</span> <span class="p">{</span>
+    <span class="na">title</span><span class="p">:</span> <span class="s2">`</span><span class="p">${</span><span class="nx">quote</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">a</span><span class="p">}</span><span class="s2">`</span><span class="p">,</span>
+    <span class="na">padding</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="na">margin</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="na">borderStyle</span><span class="p">:</span> <span class="dl">"</span><span class="s2">round</span><span class="dl">"</span><span class="p">,</span>
+  <span class="p">})</span>
+<span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">confirmResp</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">questions</span><span class="p">.</span><span class="nx">confirmSave</span><span class="p">();</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nx">confirmResp</span><span class="p">.</span><span class="nx">confirm</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">()</span> <span class="o">==</span> <span class="dl">"</span><span class="s2">YES</span><span class="dl">"</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">spinner</span> <span class="o">=</span> <span class="nx">ora</span><span class="p">(</span><span class="dl">"</span><span class="s2">Saving quote</span><span class="dl">"</span><span class="p">).</span><span class="nx">start</span><span class="p">();</span>
+  <span class="kd">let</span> <span class="nx">saved</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">utils</span><span class="p">.</span><span class="nx">saveQuote</span><span class="p">(</span><span class="nx">quote</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">q</span><span class="p">,</span> <span class="nx">quote</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">a</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">saved</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">spinner</span><span class="p">.</span><span class="nx">succeed</span><span class="p">(</span><span class="dl">"</span><span class="s2">Quote saved</span><span class="dl">"</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nx">spinner</span><span class="p">.</span><span class="nx">fail</span><span class="p">(</span><span class="dl">"</span><span class="s2">Could not save quote</span><span class="dl">"</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+  <span class="c1">// exit</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>So there you have it. We have covered each fo the basic interactivity we are used to seeing in modern command line applications. The packages used are linked below for further reference:</p>
+
+<ul>
+  <li><a href="https://www.npmjs.com/package/inquirer">inquirer</a></li>
+  <li><a href="https://www.npmjs.com/package/boxen">boxen</a></li>
+  <li><a href="https://www.npmjs.com/package/ora">ora</a></li>
+  <li><a href="https://www.npmjs.com/package/uuid">uuid</a></li>
+</ul>
+
+
+
+</div>
+  </main>
+  <footer class="mt-auto py-3 text-center">
+
+  <small class="text-muted mb-2">
+    <i class="fas fa-code"></i> with <i class="fas fa-heart"></i>
+    by <strong>Sandeep Menon</strong>
+  </small>
+
+  <div class="container-fluid justify-content-center"><a class="social mx-1"  href="mailto:thesandeepmenon@gmail.com"
+       style="color: #6c757d"
+       onMouseOver="this.style.color='#db4437'"
+       onMouseOut="this.style.color='#6c757d'">
+      <i class="fas fa-envelope fa-1x"></i>
+    </a><a class="social mx-1"  href="https://www.github.com/sandeep-menon"
+       style="color: #6c757d"
+       onMouseOver="this.style.color='#333333'"
+       onMouseOut="this.style.color='#6c757d'">
+      <i class="fab fa-github fa-1x"></i>
+    </a><a class="social mx-1"  href="https://www.linkedin.com/in/sandeep-menon-7917121a"
+       style="color: #6c757d"
+       onMouseOver="this.style.color='#007bb5'"
+       onMouseOut="this.style.color='#6c757d'">
+      <i class="fab fa-linkedin-in fa-1x"></i>
+    </a>
+
+</div><small id="attribution">
+    theme <a href="https://github.com/YoussefRaafatNasry/portfolYOU">portfolYOU</a>
+  </small>
+
+</footer>
+
+  
+  <!-- GitHub Buttons -->
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+<!-- jQuery CDN -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Popper.js CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+
+<!-- Bootstrap JS CDN -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<!-- wow.js CDN & Activation -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.js"></script>
+<script> new WOW().init(); </script>
+
+<!-- Initialize all tooltips -->
+<script>
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+})
+</script>
+</body>
+
+</html>

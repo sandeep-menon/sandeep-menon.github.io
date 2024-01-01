@@ -1,4 +1,5 @@
 ### Site Settings ###
+### bundle exec jekyll serve ###
 title               : Sandeep Menon
 description         : >-
                       Hi there 👋, I'm Sandeep. 
